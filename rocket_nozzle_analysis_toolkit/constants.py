@@ -3,4 +3,4 @@
 R = 8.314
 
 # Gravitational Acceleration [units; meter second^-2]
-g = 9.81
+g_0 = 9.81

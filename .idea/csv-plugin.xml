@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/rocket_nozzle_analysis_toolkit/tools.py">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
