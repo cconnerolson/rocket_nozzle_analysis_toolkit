@@ -1,9 +1,6 @@
 import numpy as np
 
-import rocket_nozzle_analysis_toolkit.constants
-
-R = rocket_nozzle_analysis_toolkit.constants.R
-g_0 = rocket_nozzle_analysis_toolkit.constants.g
+from rocket_nozzle_analysis_toolkit.constants import *
 
 
 def mass_flow_rate(A_t, p_c, T_c, g, M):
