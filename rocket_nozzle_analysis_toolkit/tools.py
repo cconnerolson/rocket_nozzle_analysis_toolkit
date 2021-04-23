@@ -45,7 +45,7 @@ def exhaust_velocity(g, T_c, M, p_e, p_c):
     :param p_c: Combustion chamber stagnation pressure [Pa]
     :return v_e: Exhaust exit velocity [m s^-1]
     """
-    v_e = np.sqrt(((2 * g)/(g - 1)) * ((R * T_c)/M) * (1 - (p_e / p_c)**((g - 1)/g)))
+    v_e = np.sqrt(((2 * g)/(g - 1)) * (R / M * T_c) * (1 - (p_e / p_c)**((g - 1)/g)))
     return v_e
 
 
@@ -65,14 +65,16 @@ def thrust(g, p_a, p_c, p_e, A_t, m_dot=None, T_c=None, M=None, A_e=None, e_r=No
     :return T: Nozzle thrust force [N]
     """
     if (e_r is None) and (T_c is not None and M is not None and A_e is not None):
-        T = m_dot * exhaust_velocity(g, T_c, M, p_e, p_c) \
-            + (p_e - p_a) * A_e
-    elif e_r is not None or A_e is not None:
-        if e_r is None:
-            e_r = A_e / A_t
-        T = A_t * p_c * thrust_coefficient(p_c, p_e, g, p_a, e_r)
-    else:
-        raise ValueError('e_r or T_c, M, and A_e must be provided!')
+        if m_dot is None:
+            m_dot = mass_flow_rate(A_t, p_c, T_c, g, M)
+        T = m_dot * 2751 + (p_e - p_a) * A_e
+
+    #elif e_r is not None or A_e is not None:
+    #    if e_r is None:
+    #        e_r = A_e / A_t
+    #   T = A_t * p_c * thrust_coefficient(p_c, p_e, g, p_a, e_r)
+    #else:
+    #    raise ValueError('e_r or T_c, M, and A_e must be provided!')
     return T
 
 

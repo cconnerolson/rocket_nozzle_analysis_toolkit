@@ -20,12 +20,12 @@ class Engine:
         # if self.A_t is not 0.0 and self.A_e is not 0.0:
         #    self.e_r = self.A_e / self.A_t
 
-    def thrust(self):
-        T = tools.thrust(self.g, self.p_a, self.p_c, self.p_e, self.A_t, self.T_c, self.M, self.A_e, e_r=None)
-        return T
+    #def thrust(self):
+    #    T = tools.thrust(self.g, self.p_a, self.p_c, self.p_e, self.A_t, self.T_c, self.M, self.A_e, e_r=None)
+    #    return T
 
 
-F1 = Engine(name='F1', p_c=7000000, T_c=3572, g=1.15, M=22.186, A_t=0.672, A_e=10.75, e_r=16, m_dot=2578)
+F1 = Engine(name='F1', p_c=7000000, p_e=55377, T_c=3572, g=1.22, M=22.186, A_t=0.672, A_e=10.75, e_r=16, m_dot=2578)
 
 print(F1)
 
