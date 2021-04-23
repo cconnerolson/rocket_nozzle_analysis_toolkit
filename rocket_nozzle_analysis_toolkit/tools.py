@@ -51,7 +51,7 @@ def exhaust_velocity(g, T_c, M, p_e, p_c):
     return v_e
 
 
-def thrust(g, p_a, p_c, p_e, A_t, T_c=None, M=None, A_e=None, e_r=None):
+def thrust(g, p_a, p_c, p_e, A_t, m_dot=None, T_c=None, M=None, A_e=None, e_r=None):
     """
     Calculates the thrust force of an engine.
     :param g: Gamma; specific heat ratio []
@@ -59,6 +59,7 @@ def thrust(g, p_a, p_c, p_e, A_t, T_c=None, M=None, A_e=None, e_r=None):
     :param p_c: Combustion chamber stagnation pressure [Pa]
     :param p_e: Nozzle exit pressure [Pa]
     :param A_t: Nozzle throat area [m^2]
+    :param m_dot: Mass flow rate [kg s^-1]
     :param T_c: Combustion chamber stagnation temperature [K]
     :param M: Molecular mass [kg kg-mol^-1]
     :param A_e: Nozzle exit area [m^2]
@@ -66,7 +67,7 @@ def thrust(g, p_a, p_c, p_e, A_t, T_c=None, M=None, A_e=None, e_r=None):
     :return T: Nozzle thrust force [N]
     """
     if (e_r is None) and (T_c is not None and M is not None and A_e is not None):
-        T = mass_flow_rate(A_t, p_c, T_c, g, M) * exhaust_velocity(g, T_c, M, p_e, p_c) \
+        T = m_dot * exhaust_velocity(g, T_c, M, p_e, p_c) \
             + (p_e - p_a) * A_e
     elif e_r is not None or A_e is not None:
         if e_r is None:
@@ -90,7 +91,7 @@ def specific_impulse(A_t, p_c, T_c, g, M, T=None, p_e=None, p_a=None, A_e=None, 
     :param p_a: Ambient pressure [Pa]
     :param A_e: Nozzle exit area [m^2]
     :param e_r: Nozzle expansion ratio []
-    :return I_sp:
+    :return I_sp: Specific impulse [s]
     """
     m_dot = mass_flow_rate(A_t, p_c, T_c, g, M)
     if T is not None:
@@ -112,3 +113,6 @@ def nozzle_throat_area(m_dot, p_c, T_c, g, M):
     """
     A_t = m_dot / p_c * np.sqrt((R / M * T_c)/(g * (2/(g + 1))**((g + 1)/(g - 1))))
     return A_t
+
+
+
