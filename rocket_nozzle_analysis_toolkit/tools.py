@@ -13,8 +13,7 @@ def mass_flow_rate(A_t, p_c, T_c, g, M):
     :param M: Exhaust gas molar mass [kg mol^-1]
     :return m_dot: mass flow rate
     """
-    m_dot = A_t * p_c * g * np.sqrt((2 / (g + 1))**((g + 1)/(g - 1))) \
-        / np.sqrt(g * R / M * T_c)
+    m_dot = p_c * A_t / np.sqrt(T_c) * np.sqrt(g / (R / M) * (2 / (g + 1))**((g + 1)/(g - 1)))
     return m_dot
 
 
